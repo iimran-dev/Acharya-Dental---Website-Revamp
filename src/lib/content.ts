@@ -41,9 +41,9 @@ export const NAV_LINKS = [
 ] as const;
 
 export const HERO_METRICS = [
-  { value: 50, suffix: "+", label: "Years Legacy" },
-  { value: 5000, suffix: "+", label: "Smiles Restored" },
-  { value: 1000, suffix: "+", label: "International Patients" },
+  { value: 50, suffix: "+", label: "Years Legacy", decimals: 0 },
+  { value: 5000, suffix: "+", label: "Smiles Restored", decimals: 0 },
+  { value: 1000, suffix: "+", label: "International Patients", decimals: 0 },
   { value: 4.8, suffix: "", label: "Google Rating", decimals: 1 },
 ] as const;
 

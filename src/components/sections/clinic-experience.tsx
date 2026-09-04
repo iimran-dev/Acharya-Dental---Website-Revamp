@@ -57,7 +57,7 @@ function ParallaxImage({ item }: { item: GalleryItem }) {
 
   const revealTransition = {
     duration: 1.1,
-    ease: EASE_EDITORIAL as unknown as number[],
+    ease: EASE_EDITORIAL,
   };
 
   return (

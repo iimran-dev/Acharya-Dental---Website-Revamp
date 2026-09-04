@@ -14,7 +14,7 @@ export const fadeUp: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: EASE_EDITORIAL as unknown as number[] },
+    transition: { duration: 0.7, ease: EASE_EDITORIAL },
   },
 };
 
@@ -22,7 +22,7 @@ export const fadeIn: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { duration: 0.7, ease: EASE_EDITORIAL as unknown as number[] },
+    transition: { duration: 0.7, ease: EASE_EDITORIAL },
   },
 };
 
@@ -31,7 +31,7 @@ export const scaleReveal: Variants = {
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.8, ease: EASE_EDITORIAL as unknown as number[] },
+    transition: { duration: 0.8, ease: EASE_EDITORIAL },
   },
 };
 
@@ -143,7 +143,7 @@ export function ImageReveal({
         initial={{ scale: 1.08, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
         viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 1.1, ease: EASE_EDITORIAL as unknown as number[] }}
+        transition={{ duration: 1.1, ease: EASE_EDITORIAL }}
       />
     </div>
   );

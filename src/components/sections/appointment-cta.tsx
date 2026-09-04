@@ -19,7 +19,7 @@ import { BRAND } from "@/lib/content";
    supporting → CTAs.
    --------------------------------------------------------------- */
 
-const ease = EASE_EDITORIAL as unknown as number[];
+const ease = EASE_EDITORIAL;
 
 export function AppointmentCTA() {
   return (

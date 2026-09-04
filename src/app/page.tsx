@@ -56,7 +56,7 @@ export default function Home() {
       <Footer />
       <MobileStickyCTA />
       {/* Spacer so the fixed mobile sticky CTA does not cover the footer bottom bar */}
-      <div className="h-24 md:hidden" aria-hidden="true" />
+      <div className="h-24 md:hidden" aria-hidden={true} />
     </>
   );
 }

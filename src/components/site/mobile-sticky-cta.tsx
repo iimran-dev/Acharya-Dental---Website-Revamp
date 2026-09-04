@@ -33,7 +33,7 @@ import { BRAND } from "@/lib/content";
    recommended in page.tsx.
    --------------------------------------------------------------- */
 
-const ease = EASE_EDITORIAL as unknown as number[];
+const ease = EASE_EDITORIAL;
 
 export function MobileStickyCTA() {
   const [visible, setVisible] = React.useState(false);
