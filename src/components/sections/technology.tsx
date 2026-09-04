@@ -25,38 +25,50 @@ import { TECHNOLOGY } from "@/lib/content";
 
 type Tech = (typeof TECHNOLOGY)[number];
 
-function TechCard({ tech }: { tech: Tech }) {
+function TechCard({ tech, isHero = false }: { tech: Tech; isHero?: boolean }) {
   return (
     <article
-      className="group overflow-hidden rounded-lg border border-white/10 bg-white/[0.04] backdrop-blur-sm transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-[var(--gold)]/30 hover:shadow-[0_24px_60px_-30px_rgba(200,161,90,0.18)]"
+      className={`card-bento-dark group relative flex flex-col overflow-hidden ${
+        isHero ? "lg:flex-row" : ""
+      }`}
     >
-      {/* Image */}
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[var(--navy-700)]">
+      {/* Image Frame */}
+      <div
+        className={`relative overflow-hidden bg-[var(--navy-700)] ${
+          isHero
+            ? "aspect-[16/10] w-full lg:aspect-auto lg:w-1/2"
+            : "aspect-[16/10] w-full"
+        }`}
+      >
         <img
           src={tech.image}
           alt={`${tech.name} at Acharya Dental — modern clinical technology`}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
+          className="h-full w-full object-cover transition-transform duration-700 var(--ease-editorial) group-hover:scale-105"
         />
-        {/* Bottom navy gradient overlay for legibility (decorative) */}
+        {/* Bottom navy gradient overlay for legibility */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[rgba(11,27,48,0.65)] via-[rgba(11,27,48,0.18)] to-transparent"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--navy)]/90 via-[var(--navy)]/20 to-transparent"
         />
       </div>
 
-      {/* Content panel — minimal glassmorphism */}
-      <div className="p-6 md:p-7">
+      {/* Content panel */}
+      <div
+        className={`flex flex-col justify-center p-6 md:p-8 ${
+          isHero ? "lg:w-1/2" : ""
+        }`}
+      >
         {/* Gold rule above the name */}
         <span
           aria-hidden="true"
-          className="mb-4 block h-px w-10 bg-gradient-to-r from-[var(--gold)] to-transparent transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-16"
+          className="mb-4 block h-px w-10 bg-gradient-to-r from-[var(--gold)] to-transparent transition-all duration-500 var(--ease-editorial) group-hover:w-16"
         />
         <h3 className="font-[var(--font-playfair)] text-xl font-medium leading-tight text-white md:text-2xl">
           {tech.name}
         </h3>
-        <p className="mt-3 text-pretty text-[0.92rem] leading-[1.65] text-white/75">
+        <p className="mt-3 text-pretty text-sm leading-relaxed text-white/80 md:text-base">
           {tech.description}
         </p>
       </div>
@@ -79,12 +91,18 @@ export function Technology() {
           tone="light"
         />
 
-        <RevealGroup className="mt-16 grid grid-cols-1 gap-6 lg:mt-20 lg:grid-cols-2">
-          {TECHNOLOGY.map((t) => (
-            <RevealItem key={t.name}>
-              <TechCard tech={t} />
-            </RevealItem>
-          ))}
+        <RevealGroup className="mt-14 grid grid-cols-1 gap-6 lg:mt-18 lg:grid-cols-2">
+          {TECHNOLOGY.map((t, index) => {
+            const isHero = index === 0;
+            return (
+              <RevealItem
+                key={t.name}
+                className={isHero ? "lg:col-span-2" : "lg:col-span-1"}
+              >
+                <TechCard tech={t} isHero={isHero} />
+              </RevealItem>
+            );
+          })}
         </RevealGroup>
       </div>
     </section>

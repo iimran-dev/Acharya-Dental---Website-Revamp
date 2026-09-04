@@ -228,8 +228,9 @@ export function Navbar() {
       initial={false}
       animate={{
         backgroundColor: scrolled
-          ? "rgba(16, 35, 63, 0.96)"
+          ? "rgba(16, 35, 63, 0.88)"
           : "rgba(16, 35, 63, 0)",
+        backdropFilter: scrolled ? "blur(12px)" : "blur(0px)",
         boxShadow: scrolled
           ? "0 10px 30px -20px rgba(0,0,0,0.55)"
           : "0 0 0 rgba(0,0,0,0)",

@@ -76,20 +76,57 @@ export function WhyAcharya() {
           tone="light"
         />
 
-        {/* Four feature blocks — vertical dividers on lg+, horizontal on mobile.
-            Padding + first/last variants live on the grid children (RevealItems)
-            so the first/last truly target the first/last column. */}
-        <RevealGroup
-          className="mt-16 grid grid-cols-1 divide-y divide-white/15 lg:mt-20 lg:grid-cols-4 lg:divide-x lg:divide-y-0 lg:divide-white/15"
-        >
-          {WHY_ACHARYA.map((f) => (
-            <RevealItem
-              key={f.number}
-              className="px-1 py-10 first:pt-0 last:pb-0 lg:px-8 lg:py-0 lg:first:pl-0 lg:last:pr-0"
-            >
-              <FeatureBlock feature={f} />
-            </RevealItem>
-          ))}
+        {/* Bento Grid — 1 dominant span-2 hero feature + 3 single-span features */}
+        <RevealGroup className="mt-14 grid grid-cols-1 gap-6 lg:mt-18 lg:grid-cols-3">
+          {WHY_ACHARYA.map((f, i) => {
+            const isHero = i === 0;
+            const Icon = ICONS[f.icon] ?? Award;
+
+            return (
+              <RevealItem
+                key={f.number}
+                className={isHero ? "lg:col-span-2" : "lg:col-span-1"}
+              >
+                <div
+                  className={`card-bento-dark group relative flex h-full flex-col justify-between overflow-hidden p-8 md:p-10 ${
+                    isHero ? "border-[var(--gold)]/30 bg-navy-700/60" : ""
+                  }`}
+                >
+                  {/* Background glow accent for hero card */}
+                  {isHero && (
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-[var(--gold)]/10 blur-3xl transition-opacity duration-500 group-hover:opacity-100"
+                    />
+                  )}
+
+                  {/* Card Header: Ordinal + Icon */}
+                  <div className="flex items-center justify-between gap-4">
+                    <span
+                      aria-hidden="true"
+                      className="font-[var(--font-playfair)] text-5xl font-semibold leading-none text-white/30 transition-colors duration-300 group-hover:text-[var(--gold-soft)] md:text-6xl"
+                    >
+                      {f.number}
+                    </span>
+
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-[var(--gold)]/30 bg-[var(--navy)]/60 text-[var(--gold)] shadow-inner transition-transform duration-300 group-hover:scale-110 group-hover:border-[var(--gold)]">
+                      <Icon className="h-6 w-6" strokeWidth={1.75} aria-hidden="true" />
+                    </div>
+                  </div>
+
+                  {/* Card Content */}
+                  <div className="relative z-10 mt-8">
+                    <h3 className="font-[var(--font-playfair)] text-xl font-medium tracking-tight text-white md:text-2xl">
+                      {f.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-pretty text-white/80 md:text-base">
+                      {f.description}
+                    </p>
+                  </div>
+                </div>
+              </RevealItem>
+            );
+          })}
         </RevealGroup>
       </div>
     </section>

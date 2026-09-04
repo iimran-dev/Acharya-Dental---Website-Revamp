@@ -132,7 +132,7 @@ export function Hero() {
         {/* 3. Supporting lead */}
         <motion.p
           variants={heroItem}
-          className="lead mt-7 max-w-[52ch] text-pretty text-white/75"
+          className="lead mt-7 max-w-[52ch] text-pretty text-white/90 font-normal"
         >
           Advanced Dentistry in Chennai for Families and International Patients.
         </motion.p>

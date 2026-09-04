@@ -276,6 +276,24 @@
     border-color: rgba(200, 161, 90, 0.35);
   }
 
+  /* Dark bento card — for luxury dark backgrounds */
+  .card-bento-dark {
+    background: rgba(27, 58, 92, 0.45);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(200, 161, 90, 0.18);
+    border-radius: var(--radius-xl);
+    transition: transform 320ms var(--ease-editorial),
+                box-shadow 320ms var(--ease-editorial),
+                border-color 320ms var(--ease-editorial),
+                background-color 320ms var(--ease-editorial);
+  }
+  .card-bento-dark:hover {
+    transform: translateY(-4px);
+    background: rgba(27, 58, 92, 0.65);
+    border-color: rgba(200, 161, 90, 0.45);
+    box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.5), 0 0 30px -10px rgba(200, 161, 90, 0.15);
+  }
+
   /* Custom scrollbar — refined */
   .scroll-lux::-webkit-scrollbar {
     width: 6px;
