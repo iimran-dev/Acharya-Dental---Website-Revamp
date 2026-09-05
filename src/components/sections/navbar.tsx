@@ -73,19 +73,19 @@ function DesktopNav({ activeId }: { activeId: string }) {
   };
 
   return (
-    <nav aria-label="Primary" className="hidden lg:block">
-      <ul className="flex items-center gap-7 xl:gap-9">
+    <nav aria-label="Primary" className="hidden flex-1 items-center justify-center px-6 lg:flex">
+      <ul className="flex items-center gap-5 xl:gap-8 2xl:gap-10">
         {NAV_LINKS.map((link) => {
           const targetId = link.href.replace("#", "");
           const isActive = activeId === targetId;
 
           return (
-            <li key={link.href}>
+            <li key={link.href} className="shrink-0">
               <a
                 href={link.href}
                 onClick={(e) => handleClick(e, link.href)}
                 className={cn(
-                  "relative py-1 text-[0.78rem] font-semibold uppercase tracking-[0.16em] transition-colors duration-300",
+                  "relative py-1 text-[0.74rem] font-semibold uppercase tracking-[0.14em] transition-colors duration-300 xl:text-[0.78rem] xl:tracking-[0.16em]",
                   isActive
                     ? "text-[var(--gold)] font-bold"
                     : "text-[var(--navy)] hover:text-[var(--gold)]",
@@ -108,30 +108,6 @@ function DesktopNav({ activeId }: { activeId: string }) {
   );
 }
 
-function DesktopActions() {
-  return (
-    <div className="hidden items-center gap-3 lg:flex">
-      <a
-        href={BRAND.whatsappHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Chat on WhatsApp"
-        className="grid h-10 w-10 place-items-center rounded-full border border-[var(--navy)]/20 text-[var(--navy)] transition-all duration-300 hover:border-[var(--gold)] hover:bg-[var(--gold)]/10 hover:text-[var(--gold)]"
-      >
-        <WhatsAppIcon className="h-4 w-4" />
-      </a>
-      <LuxuryButton
-        as="link"
-        href="#contact"
-        variant="gold"
-        size="sm"
-        icon={<Calendar className="h-3.5 w-3.5" aria-hidden="true" />}
-      >
-        Book Appointment
-      </LuxuryButton>
-    </div>
-  );
-}
 
 function MobileMenu({ activeId }: { activeId: string }) {
   const [open, setOpen] = React.useState(false);
@@ -323,14 +299,15 @@ export function Navbar() {
     >
       <div
         className={cn(
-          "mx-auto flex max-w-[1280px] items-center justify-between px-6 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+          "mx-auto flex w-full max-w-[1536px] items-center justify-between px-6 lg:px-10 xl:px-12 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
           scrolled ? "h-16" : "h-20",
         )}
       >
-        <Wordmark scrolled={scrolled} />
+        <div className="shrink-0">
+          <Wordmark scrolled={scrolled} />
+        </div>
         <DesktopNav activeId={activeId} />
-        <div className="flex items-center gap-3">
-          <DesktopActions />
+        <div className="flex shrink-0 items-center gap-3">
           <MobileMenu activeId={activeId} />
         </div>
       </div>
