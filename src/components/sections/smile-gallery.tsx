@@ -38,7 +38,7 @@ const CASE_TEASERS: Record<string, string> = {
   "case-1":
     "Worn and uneven enamel, restored conservatively with porcelain veneers.",
   "case-2":
-    "Anterior spaces and discoloration, addressed without orthodontics.",
+    "Facial tone and aesthetic symmetry, refreshed with custom clinical protocols.",
 };
 
 type SmileCase = (typeof SMILE_CASES)[number];

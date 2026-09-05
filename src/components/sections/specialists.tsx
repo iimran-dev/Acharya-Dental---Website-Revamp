@@ -1,5 +1,7 @@
 "use client";
 
+import * as React from "react";
+
 import { Plus } from "lucide-react";
 import { RevealGroup, RevealItem } from "@/components/site/motion";
 import { SectionHeading } from "@/components/site/section-heading";
@@ -16,16 +18,21 @@ import { SPECIALISTS } from "@/lib/content";
 type Specialist = (typeof SPECIALISTS)[number];
 
 function SpecialistCard({ specialist }: { specialist: Specialist }) {
+  const [imgSrc, setImgSrc] = React.useState(specialist.image);
+
   return (
     <article className="group">
       {/* Portrait */}
       <div className="relative overflow-hidden rounded-lg bg-[var(--light-gray)] shadow-[0_0_0_rgba(16,35,63,0)] transition-shadow duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:shadow-[0_12px_30px_-20px_rgba(16,35,63,0.25)]">
         <div className="aspect-[4/5] w-full overflow-hidden">
           <img
-            src={specialist.image}
+            src={imgSrc}
             alt={`${specialist.name} — ${specialist.specialization}`}
             loading="lazy"
             decoding="async"
+            onError={() => {
+              setImgSrc("https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=800&q=85");
+            }}
             className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
           />
         </div>

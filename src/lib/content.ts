@@ -64,7 +64,7 @@ export const SPECIALISTS = [
     qualification: "BDS, MDS — Conservative Dentistry & Endodontics",
     experience: "18+ years",
     specialization: "Cosmetic & Smile Design",
-    image: "https://images.unsplash.com/photo-1594824813566-78853b49fcf9?auto=format&fit=crop&w=800&q=85",
+    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=800&q=85",
     bio: "Specialises in smile makeovers, veneers, and conservative aesthetic restorations.",
   },
   {
@@ -147,24 +147,24 @@ export const SMILE_CASES = [
   {
     id: "case-1",
     title: "Smile Makeover with Veneers",
-    before: "https://images.unsplash.com/photo-1571772996211-2f02c9727629?auto=format&fit=crop&w=1000&q=85",
-    after: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=85",
+    before: assetPath("/images/cases/case-1-before.jpg"),
+    after: assetPath("/images/cases/case-1-after.jpg"),
     story:
-      "A patient with worn and uneven enamel sought a natural, brighter smile without a noticeably artificial result.",
-    treatment: "Porcelain veneers and minor contouring",
+      "A patient with worn and discolored enamel sought a natural, brighter smile with long-lasting ceramic veneers.",
+    treatment: "Porcelain veneers and minor aesthetic contouring",
     outcome:
       "A balanced, brighter smile that preserved the patient's natural tooth character.",
   },
   {
     id: "case-2",
-    title: "Anterior Space Closure",
-    before: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1000&q=85",
-    after: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=85",
+    title: "Facial Aesthetics & Smile Harmony",
+    before: assetPath("/images/cases/case-2-before.jpg"),
+    after: assetPath("/images/cases/case-2-after.jpg"),
     story:
-      "A young adult wanted to address visible gaps and discoloration conservatively, without orthodontics.",
-    treatment: "Minimally invasive ceramic veneers and whitening",
+      "A patient wanted to address visible skin texture, under-eye tone, and overall facial tone conservatively.",
+    treatment: "Comprehensive aesthetic smile design and facial rejuvenation protocol",
     outcome:
-      "Closed anterior spaces with a natural, proportionate smile line.",
+      "A refreshed, vibrant facial aesthetic with natural tone and enhanced smile symmetry.",
   },
 ];
 
