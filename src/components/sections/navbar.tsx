@@ -60,20 +60,49 @@ function Wordmark({ scrolled }: { scrolled: boolean }) {
   );
 }
 
-function DesktopNav() {
+function DesktopNav({ activeId }: { activeId: string }) {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const el = document.querySelector(href);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        window.history.pushState(null, "", href);
+      }
+    }
+  };
+
   return (
     <nav aria-label="Primary" className="hidden lg:block">
-      <ul className="flex items-center gap-9">
-        {NAV_LINKS.map((link) => (
-          <li key={link.href}>
-            <Link
-              href={link.href}
-              className="link-gold text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-[var(--navy)] transition-colors hover:text-[var(--gold)]"
-            >
-              {link.label}
-            </Link>
-          </li>
-        ))}
+      <ul className="flex items-center gap-7 xl:gap-9">
+        {NAV_LINKS.map((link) => {
+          const targetId = link.href.replace("#", "");
+          const isActive = activeId === targetId;
+
+          return (
+            <li key={link.href}>
+              <a
+                href={link.href}
+                onClick={(e) => handleClick(e, link.href)}
+                className={cn(
+                  "relative py-1 text-[0.78rem] font-semibold uppercase tracking-[0.16em] transition-colors duration-300",
+                  isActive
+                    ? "text-[var(--gold)] font-bold"
+                    : "text-[var(--navy)] hover:text-[var(--gold)]",
+                )}
+              >
+                {link.label}
+                {isActive && (
+                  <motion.span
+                    layoutId="activeNavIndicator"
+                    className="absolute inset-x-0 -bottom-1 h-[2px] bg-[var(--gold)] rounded-full"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );
@@ -104,8 +133,22 @@ function DesktopActions() {
   );
 }
 
-function MobileMenu() {
+function MobileMenu({ activeId }: { activeId: string }) {
   const [open, setOpen] = React.useState(false);
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    setOpen(false);
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      setTimeout(() => {
+        const el = document.querySelector(href);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+          window.history.pushState(null, "", href);
+        }
+      }, 150);
+    }
+  };
 
   return (
     <div className="lg:hidden">
@@ -150,30 +193,45 @@ function MobileMenu() {
             {/* Nav links */}
             <nav aria-label="Mobile primary" className="mt-8 flex-1">
               <ul className="flex flex-col gap-1">
-                {NAV_LINKS.map((link, i) => (
-                  <li key={link.href}>
-                    <motion.div
-                      initial={{ opacity: 0, x: 24 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{
-                        duration: 0.5,
-                        ease: EASE_EDITORIAL,
-                        delay: 0.08 * i,
-                      }}
-                    >
-                      <Link
-                        href={link.href}
-                        onClick={() => setOpen(false)}
-                        className="block py-3 font-[var(--font-playfair)] text-2xl font-medium text-[var(--navy)] transition-colors hover:text-[var(--gold)]"
+                {NAV_LINKS.map((link, i) => {
+                  const targetId = link.href.replace("#", "");
+                  const isActive = activeId === targetId;
+
+                  return (
+                    <li key={link.href}>
+                      <motion.div
+                        initial={{ opacity: 0, x: 24 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{
+                          duration: 0.5,
+                          ease: EASE_EDITORIAL,
+                          delay: 0.06 * i,
+                        }}
                       >
-                        <span className="mr-3 text-[0.7rem] font-semibold text-[var(--gold)]">
-                          0{i + 1}
-                        </span>
-                        {link.label}
-                      </Link>
-                    </motion.div>
-                  </li>
-                ))}
+                        <a
+                          href={link.href}
+                          onClick={(e) => handleClick(e, link.href)}
+                          className={cn(
+                            "flex items-center justify-between py-3 font-[var(--font-playfair)] text-xl font-medium transition-colors",
+                            isActive
+                              ? "text-[var(--gold)] font-semibold"
+                              : "text-[var(--navy)] hover:text-[var(--gold)]",
+                          )}
+                        >
+                          <div>
+                            <span className="mr-3 text-[0.7rem] font-semibold text-[var(--gold)]">
+                              0{i + 1}
+                            </span>
+                            {link.label}
+                          </div>
+                          {isActive && (
+                            <span className="h-2 w-2 rounded-full bg-[var(--gold)]" />
+                          )}
+                        </a>
+                      </motion.div>
+                    </li>
+                  );
+                })}
               </ul>
             </nav>
 
@@ -212,6 +270,7 @@ function MobileMenu() {
 
 export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false);
+  const [activeId, setActiveId] = React.useState<string>("");
 
   React.useEffect(() => {
     const onScroll = () => {
@@ -220,6 +279,30 @@ export function Navbar() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  React.useEffect(() => {
+    const sectionIds = NAV_LINKS.map((link) => link.href.replace("#", ""));
+    const observerCallback: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveId(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+      root: null,
+      rootMargin: "-20% 0px -60% 0px",
+      threshold: 0,
+    });
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -245,10 +328,10 @@ export function Navbar() {
         )}
       >
         <Wordmark scrolled={scrolled} />
-        <DesktopNav />
+        <DesktopNav activeId={activeId} />
         <div className="flex items-center gap-3">
           <DesktopActions />
-          <MobileMenu />
+          <MobileMenu activeId={activeId} />
         </div>
       </div>
     </motion.header>

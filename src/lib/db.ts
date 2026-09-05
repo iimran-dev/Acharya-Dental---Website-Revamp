@@ -1,13 +1,27 @@
-import { PrismaClient } from '@prisma/client'
+export type AppointmentRecord = {
+  id: string;
+  name: string;
+  phone: string;
+  email: string;
+  treatment: string;
+  date: string;
+  message: string;
+  createdAt: Date;
+};
 
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined
-}
+const appointmentsStore: AppointmentRecord[] = [];
 
-export const db =
-  globalForPrisma.prisma ??
-  new PrismaClient({
-    log: ['query'],
-  })
-
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = db
+export const db = {
+  appointment: {
+    create: async ({ data }: { data: Omit<AppointmentRecord, "id" | "createdAt"> }) => {
+      const record: AppointmentRecord = {
+        id: `appt_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+        ...data,
+        createdAt: new Date(),
+      };
+      appointmentsStore.push(record);
+      return record;
+    },
+    findMany: async () => [...appointmentsStore],
+  },
+};

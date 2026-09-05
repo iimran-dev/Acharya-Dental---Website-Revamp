@@ -112,13 +112,7 @@ export function Hero() {
           variants={heroItem}
           className="mb-7 flex items-center gap-3"
         >
-          <span
-            aria-hidden="true"
-            className="h-px w-12 bg-gradient-to-r from-[var(--gold)] to-transparent"
-          />
-          <span className="eyebrow eyebrow-light">
-            50+ Years of Dental Excellence
-          </span>
+
         </motion.div>
 
         {/* 2. Headline */}
@@ -145,7 +139,7 @@ export function Hero() {
           <LuxuryButton
             as="link"
             href="#contact"
-            variant="gold"
+            variant="light"
             size="lg"
             icon={<Calendar className="h-4 w-4" aria-hidden="true" />}
           >

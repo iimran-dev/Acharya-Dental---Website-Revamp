@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
+export const dynamic = "force-static";
+
+
 /**
  * POST /api/appointment
  * Creates a new appointment request from the website contact form.
