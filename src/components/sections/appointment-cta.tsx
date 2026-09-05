@@ -104,7 +104,7 @@ export function AppointmentCTA() {
             <LuxuryButton
               as="link"
               href="#contact"
-              variant="gold"
+              variant="light"
               size="lg"
               icon={<Calendar className="h-4 w-4" aria-hidden="true" />}
             >

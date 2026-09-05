@@ -3,6 +3,8 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
+import { BASE_PATH } from "@/lib/utils";
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -46,7 +48,12 @@ export const metadata: Metadata = {
       "Advanced dentistry in Chennai for families and international patients.",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: `${BASE_PATH}/favicon.ico` },
+      { url: `${BASE_PATH}/icon.png`, type: "image/png" },
+    ],
+    shortcut: `${BASE_PATH}/favicon.ico`,
+    apple: `${BASE_PATH}/icon.png`,
   },
 };
 
