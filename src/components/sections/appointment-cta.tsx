@@ -6,6 +6,7 @@ import { LuxuryButton } from "@/components/site/luxury-button";
 import { WhatsAppIcon } from "@/components/site/icons";
 import { EASE_EDITORIAL } from "@/components/site/motion";
 import { BRAND } from "@/lib/content";
+import { assetPath } from "@/lib/utils";
 
 /* ---------------------------------------------------------------
    AppointmentCTA — large, visually focused conversion section.
@@ -30,7 +31,7 @@ export function AppointmentCTA() {
     >
       {/* Background image */}
       <img
-        src="/images/cta-background.jpg"
+        src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1800&q=85"
         alt=""
         aria-hidden="true"
         className="absolute inset-0 h-full w-full object-cover"

@@ -1,6 +1,7 @@
 "use client";
 
 import { RevealGroup, RevealItem, ImageReveal } from "@/components/site/motion";
+import { assetPath } from "@/lib/utils";
 
 /* ---------------------------------------------------------------
    Heritage — editorial about / legacy section.
@@ -78,7 +79,7 @@ export function Heritage() {
               />
 
               <ImageReveal
-                src="/images/heritage-legacy.jpg"
+                src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=85"
                 alt="Archival clinical instruments from the early days of Acharya Dental, restored and preserved"
                 className="aspect-[4/5] w-full"
               />

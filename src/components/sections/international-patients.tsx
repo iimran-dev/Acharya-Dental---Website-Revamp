@@ -10,6 +10,7 @@ import {
 import { SectionHeading } from "@/components/site/section-heading";
 import { LuxuryButton } from "@/components/site/luxury-button";
 import { INTERNATIONAL_FEATURES } from "@/lib/content";
+import { assetPath } from "@/lib/utils";
 
 /* ---------------------------------------------------------------
    InternationalPatients — luxury medical concierge service.
@@ -125,7 +126,7 @@ export function InternationalPatients() {
               />
 
               <ImageReveal
-                src="/images/international-concierge.jpg"
+                src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
                 alt="A concierge coordinator assisting an international dental patient with travel and accommodation arrangements at Acharya Dental"
                 className="aspect-[4/5] w-full"
               />

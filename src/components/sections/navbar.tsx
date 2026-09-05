@@ -19,8 +19,8 @@ import { NAV_LINKS, BRAND } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 /* ---------------------------------------------------------------
-   Navbar — transparent over hero, transitions to solid navy on
-   scroll. Sticky. Mobile menu via shadcn Sheet (right side).
+   Navbar — light luxury theme. Warm white / white glassmorphism
+   with deep navy typography, gold monogram, and sticky header.
    --------------------------------------------------------------- */
 
 const SCROLL_THRESHOLD = 80;
@@ -29,7 +29,7 @@ function Monogram() {
   return (
     <span
       aria-hidden="true"
-      className="grid h-8 w-8 place-items-center border border-[var(--gold)]/60 text-[var(--gold)] font-[var(--font-playfair)] text-sm leading-none"
+      className="grid h-8 w-8 place-items-center rounded-md border border-[var(--gold)] bg-[var(--navy)] text-[var(--gold)] font-[var(--font-playfair)] text-sm font-semibold leading-none shadow-sm"
     >
       A
     </span>
@@ -48,7 +48,7 @@ function Wordmark({ scrolled }: { scrolled: boolean }) {
       <Monogram />
       <span
         className={cn(
-          "font-[var(--font-playfair)] tracking-[0.28em] text-white transition-all duration-500",
+          "font-[var(--font-playfair)] tracking-[0.28em] font-semibold text-[var(--navy)] transition-all duration-500",
           scrolled
             ? "text-[0.78rem] sm:text-[0.82rem]"
             : "text-[0.82rem] sm:text-[0.88rem]",
@@ -68,7 +68,7 @@ function DesktopNav() {
           <li key={link.href}>
             <Link
               href={link.href}
-              className="link-gold text-[0.78rem] font-medium uppercase tracking-[0.18em] text-white/85 hover:text-white"
+              className="link-gold text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-[var(--navy)] transition-colors hover:text-[var(--gold)]"
             >
               {link.label}
             </Link>
@@ -87,7 +87,7 @@ function DesktopActions() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
-        className="grid h-10 w-10 place-items-center rounded-full border border-white/25 text-white transition-all duration-300 hover:border-[var(--gold-soft)] hover:text-[var(--gold-soft)]"
+        className="grid h-10 w-10 place-items-center rounded-full border border-[var(--navy)]/20 text-[var(--navy)] transition-all duration-300 hover:border-[var(--gold)] hover:bg-[var(--gold)]/10 hover:text-[var(--gold)]"
       >
         <WhatsAppIcon className="h-4 w-4" />
       </a>
@@ -114,7 +114,7 @@ function MobileMenu() {
           <button
             type="button"
             aria-label="Open menu"
-            className="grid h-10 w-10 place-items-center rounded-full border border-white/25 text-white transition-colors hover:border-[var(--gold-soft)] hover:text-[var(--gold-soft)]"
+            className="grid h-10 w-10 place-items-center rounded-full border border-[var(--navy)]/20 text-[var(--navy)] transition-colors hover:border-[var(--gold)] hover:text-[var(--gold)]"
           >
             <Menu className="h-4 w-4" aria-hidden="true" />
           </button>
@@ -122,9 +122,8 @@ function MobileMenu() {
 
         <SheetContent
           side="right"
-          className="w-[88vw] max-w-sm border-l-0 bg-[var(--navy)] text-white sm:max-w-sm"
+          className="w-[88vw] max-w-sm border-l border-[var(--border)] bg-[var(--warm-white)] text-[var(--navy)] sm:max-w-sm"
         >
-          {/* Hide the default top-right X to use our own refined close */}
           <SheetHeader className="sr-only">
             <SheetTitle>Menu</SheetTitle>
           </SheetHeader>
@@ -132,12 +131,12 @@ function MobileMenu() {
           <div className="flex h-full flex-col px-6 pb-10 pt-8">
             {/* Top: wordmark + close */}
             <div className="flex items-center justify-between">
-              <span className="font-[var(--font-playfair)] text-sm tracking-[0.28em] text-white">
+              <span className="font-[var(--font-playfair)] text-sm font-semibold tracking-[0.28em] text-[var(--navy)]">
                 ACHARYA DENTAL
               </span>
               <SheetClose
                 aria-label="Close menu"
-                className="grid h-9 w-9 place-items-center rounded-full border border-white/20 text-white/80 transition-colors hover:border-[var(--gold-soft)] hover:text-[var(--gold-soft)]"
+                className="grid h-9 w-9 place-items-center rounded-full border border-[var(--navy)]/20 text-[var(--navy)] transition-colors hover:border-[var(--gold)] hover:text-[var(--gold)]"
               >
                 <span aria-hidden="true" className="text-lg leading-none">
                   &times;
@@ -148,7 +147,7 @@ function MobileMenu() {
             {/* Gold rule */}
             <div className="mt-8 h-px w-full bg-gradient-to-r from-[var(--gold)] via-[var(--gold)]/30 to-transparent" />
 
-            {/* Nav links — stacked, refined */}
+            {/* Nav links */}
             <nav aria-label="Mobile primary" className="mt-8 flex-1">
               <ul className="flex flex-col gap-1">
                 {NAV_LINKS.map((link, i) => (
@@ -165,9 +164,9 @@ function MobileMenu() {
                       <Link
                         href={link.href}
                         onClick={() => setOpen(false)}
-                        className="block py-3 font-[var(--font-playfair)] text-2xl text-white/90 transition-colors hover:text-[var(--gold-soft)]"
+                        className="block py-3 font-[var(--font-playfair)] text-2xl font-medium text-[var(--navy)] transition-colors hover:text-[var(--gold)]"
                       >
-                        <span className="mr-3 text-[0.7rem] text-[var(--gold)]/60">
+                        <span className="mr-3 text-[0.7rem] font-semibold text-[var(--gold)]">
                           0{i + 1}
                         </span>
                         {link.label}
@@ -194,7 +193,7 @@ function MobileMenu() {
               <LuxuryButton
                 as="link"
                 href={BRAND.whatsappHref}
-                variant="light"
+                variant="primary"
                 size="md"
                 fullWidth
                 icon={<WhatsAppIcon className="h-4 w-4" aria-hidden="true" />}
@@ -218,7 +217,7 @@ export function Navbar() {
     const onScroll = () => {
       setScrolled(window.scrollY > SCROLL_THRESHOLD);
     };
-    onScroll(); // initialize on mount (e.g., if page loads scrolled)
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -228,31 +227,17 @@ export function Navbar() {
       initial={false}
       animate={{
         backgroundColor: scrolled
-          ? "rgba(16, 35, 63, 0.88)"
-          : "rgba(16, 35, 63, 0)",
-        backdropFilter: scrolled ? "blur(12px)" : "blur(0px)",
+          ? "rgba(255, 255, 255, 0.95)"
+          : "rgba(248, 248, 246, 0.92)",
+        backdropFilter: "blur(16px)",
         boxShadow: scrolled
-          ? "0 10px 30px -20px rgba(0,0,0,0.55)"
-          : "0 0 0 rgba(0,0,0,0)",
+          ? "0 10px 30px -15px rgba(16, 35, 63, 0.12)"
+          : "0 2px 10px -5px rgba(16, 35, 63, 0.05)",
       }}
-      transition={{ duration: 0.6, ease: EASE_EDITORIAL }}
-      className="fixed inset-x-0 top-0 z-50"
+      transition={{ duration: 0.4, ease: EASE_EDITORIAL }}
+      className="fixed inset-x-0 top-0 z-50 border-b border-[var(--border)]"
       aria-label="Site header"
     >
-      {/* Subtle bottom hairline when scrolled */}
-      <AnimatePresence>
-        {scrolled && (
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-white/10"
-            aria-hidden="true"
-          />
-        )}
-      </AnimatePresence>
-
       <div
         className={cn(
           "mx-auto flex max-w-[1280px] items-center justify-between px-6 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",

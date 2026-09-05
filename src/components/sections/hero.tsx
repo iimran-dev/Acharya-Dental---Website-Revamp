@@ -7,7 +7,7 @@ import { WhatsAppIcon } from "@/components/site/icons";
 import { CountUp } from "@/components/site/count-up";
 import { EASE_EDITORIAL } from "@/components/site/motion";
 import { BRAND, HERO_METRICS } from "@/lib/content";
-import { cn } from "@/lib/utils";
+import { cn, assetPath } from "@/lib/utils";
 
 /* ---------------------------------------------------------------
    Hero — full-screen cinematic editorial hero.
@@ -71,7 +71,7 @@ export function Hero() {
     >
       {/* Background image — slow zoom */}
       <motion.img
-        src="/images/hero-clinic.jpg"
+        src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=2000&q=85"
         alt="The Acharya Dental clinic interior — a calm, refined operatory setting"
         aria-hidden="true"
         className="absolute inset-0 -z-20 h-full w-full object-cover"
